@@ -12,26 +12,40 @@ interface RegisterProps {}
 
 const Register: FC<RegisterProps> = () => {
   const dispatch = useDispatch();
-  const { loading, errors, success, msg } = useSelector((state) => state.register);
+  const { loading, errors, success, msg } = useSelector(
+    (state: any) => state.register
+  );
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [password_confirmation, setPassword_confirmation] =
+    useState<string>("");
+  const [name, setName] = useState<string>("");
+  const [username, setUsername] = useState<string>("");
+  const [error, setError] = useState<string>("");
 
-  const [error, setError] = useState("");
-
-  const handleregister = async (e) => {
+  const handleregister = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("email", email);
-    formData.append("password", password);
-    dispatch(registerUser(formData));
+
+    if (password !== password_confirmation) {
+      setError("Passwords do not match.");
+      return;
+    }
+
+    try {
+      await dispatch(
+        registerUser({ email, password, name, username, password_confirmation })
+      );
+    } catch (error) {
+      console.error("Register failed:", error);
+      setError("Registration failed. Please try again.");
+    }
   };
 
   useEffect(() => {
-    if (success === true && msg) {
+    if (success && msg) {
       toast.success(msg);
       window.location.href = "/";
-    }
-    if (success === false && msg) {
+    } else if (!success && msg) {
       toast.error(msg);
     }
   }, [success, msg]);
@@ -51,10 +65,32 @@ const Register: FC<RegisterProps> = () => {
       <div className="flex items-center justify-center min-h-screen mt-10">
         <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
           <h2 className="mb-6 text-3xl font-bold text-center text-red-500">
-            register
+            Register
           </h2>
           {error && <p className="mb-4 text-center text-red-500">{error}</p>}
           <form onSubmit={handleregister}>
+            <div className="mb-4">
+              <Label className="block text-gray-700">Name</Label>
+              <Input
+                type="text"
+                id="name"
+                className="w-full p-2 mt-1"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                error={errors?.name}
+              />
+            </div>
+            <div className="mb-4">
+              <Label className="block text-gray-700">Username</Label>
+              <Input
+                type="text"
+                id="username"
+                className="w-full p-2 mt-1"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                error={errors?.username}
+              />
+            </div>
             <div className="mb-4">
               <Label className="block text-gray-700">Email</Label>
               <Input
@@ -71,17 +107,40 @@ const Register: FC<RegisterProps> = () => {
               <Input
                 type="password"
                 id="password"
-                className="w-full p-2 mt-1 "
+                className="w-full p-2 mt-1"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 error={errors?.password}
               />
+              {/* {errors?.password && (
+                <p className="mb-4 text-red-500">
+                  {errors.password}
+                </p>
+              )} */}
+            </div>
+            <div className="mb-6">
+              <Label className="block text-gray-700">
+                Password Confirmation
+              </Label>
+              <Input
+                type="password"
+                id="password_confirmation"
+                className="w-full p-2 mt-1"
+                value={password_confirmation}
+                onChange={(e) => setPassword_confirmation(e.target.value)}
+                error={errors?.password_confirmation}
+              />
+              {errors?.password_confirmation && (
+                <p className="mb-4 text-red-500">
+                  {errors.password_confirmation}
+                </p>
+              )}
             </div>
             <Button
               type="submit"
               className="w-full py-2 text-white bg-red-500 rounded hover:bg-red-600"
             >
-              register
+              Register
             </Button>
           </form>
         </div>

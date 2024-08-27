@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 // import { IsMatch } from "../../hooks/hooks";
 
 interface UserCardProps {
-  onclick?:string
+  onclick?: () => void;
 }
 
 const UserCard: FC<UserCardProps> = ({ onclick, ...props }) => {
@@ -16,7 +16,7 @@ const UserCard: FC<UserCardProps> = ({ onclick, ...props }) => {
     >
       {/* <div className="p-2 ">
          <h2 className="p-2 text-lg font-semibold rounded-md text-slate-900 bg-slate-100">
-          {`${user?.first_name}_${user?.last_name}`}
+          {`${user?.name}`}
         </h2> 
       </div>
       <span className=" bg-slate-400 block h-[1px]"></span>
@@ -41,8 +41,7 @@ const UserCard: FC<UserCardProps> = ({ onclick, ...props }) => {
 
       <div className="p-2 cursor-pointer">
         <ul className="">
-      
-          <Link to="/">
+          <Link to="/" >
             <li className="p-2 font-semibold bg-red-100 rounded-md">Home</li>
           </Link>
           <Link to="/Profile">
@@ -59,7 +58,7 @@ const UserCard: FC<UserCardProps> = ({ onclick, ...props }) => {
         </ul>
         <h2
           className="flex items-center justify-center gap-2 p-2 font-semibold text-white bg-red-400 rounded-md "
-          // onClick={onclick}
+          onClick={onclick}
         >
           <FaSignOutAlt />
           Log out
@@ -67,7 +66,6 @@ const UserCard: FC<UserCardProps> = ({ onclick, ...props }) => {
       </div>
     </div>
   );
-
 };
 
 export default UserCard;

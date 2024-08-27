@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { carousels } from "../../slice/Carousels/CarouselsAction";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-// import cn from "../../lib/utils";
-
 const Carousels = () => {
   const dispatch = useDispatch();
 
@@ -17,21 +15,6 @@ const Carousels = () => {
     dispatch(carousels());
   }, [dispatch]);
 
-  // const handleNext = () => {
-  //   if (data?.carusels?.length === imgCurrent) {
-  //     setImgCurrent(1);
-  //   } else {
-  //     setImgCurrent(imgCurrent + 1);
-  //   }
-  // };
-
-  // const handlePrev = () => {
-  //   if (imgCurrent > 1) {
-  //     setImgCurrent(imgCurrent - 1);
-  //   } else {
-  //     setImgCurrent(data?.carusels?.length);
-  //   }
-  // };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -50,47 +33,31 @@ const Carousels = () => {
       <div className="relative flex lg:w-[1100px] md:w-[770px] lg:h-[400px] md:h-[300px] sm:h-[230px] h-[200px] items-center">
         {/* <div className="relative flex items-center"> */}
         <div className="flex-1 w-full">
-          <Swiper
-            spaceBetween={50} 
-            slidesPerView={1} 
-            onSlideChange={(swiper) => console.log("slide change", swiper)}
+        <Swiper
+            spaceBetween={50}
+            slidesPerView={1}
+            initialSlide={imgCurrent}
+            onSlideChange={(swiper) => setImgCurrent(swiper.activeIndex)}
             onSwiper={(swiper) => console.log("swiper instance:", swiper)}
-            initialSlide={imgCurrent - 1} 
           >
-            {data?.map((e) => (
-              <SwiperSlide key={e?.id}>
-                <img
-                  className="h-[550px] w-full"
-                  src={e?.image}
-                  alt={e?.name}
-                />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-        {/* {data?.map((e, i) => {
-              return i + 1 === imgCurrent ? (
-                <img
-                  key={e?.id}
-                  className="h-[550px] w-full"
-                  src={e?.image}
-                  alt=""
-                />
-              ) : (
-                <div>{e?.name}</div>
+            {data.map((e) => {
+              // بناء الرابط الكامل للصورة
+              const imageUrl = `http://localhost/storage/${e.image.replace('uploads/', '')}`;
+              
+              return (
+                <SwiperSlide key={e.id}>
+                  <img
+                    className="object-cover w-full h-full"
+                    src={imageUrl}
+                    alt={e.name}
+                  />
+                </SwiperSlide>
               );
-            })} */}
-        {/* <div className="absolute flex items-center gap-4 -translate-x-1/2 bottom-3 right-1/2 left-1/2">
-          {data?.map((e, i) => (
-            <span
-              key={e?.id}
-              className={
-                (i === imgCurrent - 1 ? "bg-slate-800" : "bg-slate-300",
-                "cursor-pointer w-3 h-3 block rounded-full")
-              }
-            ></span>
-          ))}
-        </div> */}
+            })}
+          </Swiper>
+
+        </div>
+
       </div>
     </div>
   );

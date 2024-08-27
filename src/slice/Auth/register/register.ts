@@ -5,63 +5,74 @@ import { UserData } from "../../../lib/types";
 
 const cookies = new Cookies();
 
-interface LoginState {
+interface RegisterState {
   loading: boolean | null;
   success: boolean | null;
   msg: string;
   user: UserData | null;
   errors: Record<string, any>;
   data: UserData | null | [];
+  token: string | null; // إضافة خاصية التوكن
 }
 
-const initialState: LoginState = {
+const initialState: RegisterState = {
   loading: null,
   success: null,
   msg: "",
   user: null,
   errors: {},
   data: null,
+  token: null, // تهيئة خاصية التوكن
 };
 
-const LoginAuthSlice = createSlice({
+const RegisterAuthSlice = createSlice({
   name: "Auth",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // *********** register ********** //
-      .addCase(registerUser.pending, (state: LoginState) => {
+      // *********** Register ********** //
+      .addCase(registerUser.pending, (state: RegisterState) => {
         state.loading = true;
         state.msg = "";
         state.user = null;
         state.errors = {};
         state.success = null;
+        state.token = null; 
       })
       .addCase(
         registerUser.fulfilled,
         (
-          state: LoginState,
+          state: RegisterState,
           action: PayloadAction<{
             success: boolean;
             msg: string;
-            data: UserData;
+            data: {
+              token: string; 
+              user: UserData;
+            };
           }>
         ) => {
           state.loading = false;
           state.success = action.payload.success;
           state.msg = action.payload.msg;
-          state.user = action.payload.data;
+          state.user = action.payload.data.user; 
+          state.token = action.payload.data.token;
           state.errors = {};
+
+         
+          if (state.token) {
+            cookies.set("token", state.token, {
+              path: "/",
+              maxAge: 3600 * 24 * 10, 
+            });
+          }
+
+          // تخزين معلومات المستخدم في الكوكيز
           if (state.user?.email) {
             cookies.set("user", JSON.stringify(state.user), {
               path: "/",
-              maxAge: 3600 * 24 * 10,
-            });
-          }
-          if (state.token) {
-            cookies.set("token", JSON.stringify(state.token), {
-              path: "/",
-              maxAge: 3600 * 24 * 10,
+              maxAge: 3600 * 24 * 10, 
             });
           }
         }
@@ -69,8 +80,8 @@ const LoginAuthSlice = createSlice({
       .addCase(
         registerUser.rejected,
         (
-          state: LoginState,
-          action: PayloadAction<{ msg: string; errors: object }>
+          state: RegisterState,
+          action: PayloadAction<{ msg: string; errors: Record<string, any> }>
         ) => {
           state.loading = false;
           state.success = false;
@@ -78,7 +89,7 @@ const LoginAuthSlice = createSlice({
           state.errors = action.payload?.errors;
         }
       )
-      .addCase(clearErrors.fulfilled, (state: LoginState) => {
+      .addCase(clearErrors.fulfilled, (state: RegisterState) => {
         state.loading = false;
         state.success = null;
         state.msg = "";
@@ -87,4 +98,4 @@ const LoginAuthSlice = createSlice({
   },
 });
 
-export default LoginAuthSlice.reducer;
+export default RegisterAuthSlice.reducer;

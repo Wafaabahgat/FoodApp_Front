@@ -6,6 +6,8 @@ import Cookies from "universal-cookie";
 import { Link } from "react-router-dom";
 import { IoIosMenu } from "react-icons/io";
 
+const cookies = new Cookies();
+
 const Header = () => {
   const [open, setOpen] = useState(false);
   const userCard = useRef(null);
@@ -26,6 +28,13 @@ const Header = () => {
     setOpen((prev) => !prev);
   };
 
+  const handleLogout = () => {
+    console.log("object");
+    cookies.remove("user");
+    cookies.remove("token");
+    window.location.href = "/login";
+  };
+
   return (
     <div className="flex items-center justify-between mt-5">
       <Link to="/">
@@ -38,7 +47,7 @@ const Header = () => {
 
         {open && (
           <div className="absolute right-0 p-4 mt-2 bg-white rounded-lg shadow-lg">
-            <UserCard />
+            <UserCard onclick={handleLogout} />
           </div>
         )}
       </div>
