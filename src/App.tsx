@@ -1,10 +1,11 @@
+import React from 'react';
 import { createBrowserRouter } from "react-router-dom";
 import "./App.css";
 import Root from "./pages/Root";
 import Home from "./pages/home/Home";
-import Login from "./pages/auth/login";
 import AuthUser from "./middleware/AuthUser";
 import Register from "./pages/auth/Register";
+import Login from "./pages/auth/Login";
 import Dishes from "./pages/Dishes/Dishes";
 import SingleDish from "./pages/Dishes/SingleDish";
 // import GuestUser from "./middleware/GuestUser";
