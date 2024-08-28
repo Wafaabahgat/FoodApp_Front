@@ -16,6 +16,10 @@ export default {
         color_danger: "orangered",
         box_shadow: "0 5px 15px rgba(0, 0, 0, 0.1)",
       },
+      gridTemplateColumns: {
+        prod: "repeat(auto-fit, minmax(280px, 1fr))",
+        plog: "repeat(auto-fit, minmax(220px, 1fr))",
+      },
       // backgroundImage: {
       //   "header-img": "url('/assets/header_img.png')",
       // },

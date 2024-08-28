@@ -12,7 +12,7 @@ const Hero: FC<HeroProps> = () => {
         <img src={assets.header_img} alt="header_img" />
         <div className="absolute top-0 left-0 lg:right-48 right-10">
           <div className="max-w-[750px] lg:py-[110px] md:py-[70px] sm:py-[90px] py-2 md:px-20 px-10">
-            <div className="flex flex-col \gap-0 font-bold text-white text-[16px] sm:text-xl md:gap-2 lg:gap-4 lg:text-5xl md:text-3xl">
+            <div className="flex flex-col gap-0 font-bold text-white text-[16px] sm:text-xl md:gap-2 lg:gap-4 lg:text-5xl md:text-3xl">
               <h2 className="animate-slideUp">Order your</h2>
               <span className="animate-slideUp">favourite food here</span>
             </div>

@@ -6,10 +6,9 @@ import Container from "../components/Container";
 const Root = () => {
   return (
     <div className="flex flex-col">
-      <Container>
+      
         <Header />
         <Outlet />
-      </Container>
     </div>
   );
 };

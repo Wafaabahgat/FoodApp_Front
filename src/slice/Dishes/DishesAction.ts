@@ -36,14 +36,11 @@ export const singledish = createAsyncThunk(
   "dishes/single",
   async (args: number, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
-    console.log("dishesfff");
 
     try {
-      const { data } = await axios.get(
-        `/dishes?${args}`,
-        config
-      );
-      console.log("dishes", data);
+      // تعديل الرابط ليستخدم id مباشرةً
+      const { data } = await axios.get(`/dishes/${args}`, config);
+      console.log("dishessingl", data);
       return data;
     } catch (err) {
       if (err?.response?.data?.message === "Unauthenticated.") {
@@ -54,6 +51,7 @@ export const singledish = createAsyncThunk(
     }
   }
 );
+
 
 export const clearErrors = createAsyncThunk("carousels/clear", async () => {
   return true;

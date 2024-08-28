@@ -1,29 +1,24 @@
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import { dishesSlice } from "../../slice/Dishes/DishesAction";
 import Loader from "../../components/Loader";
+import { Link } from "react-router-dom";
 
 interface DishesProps {}
 
 const Dishes: FC<DishesProps> = () => {
   const dispatch = useDispatch();
   const { loading, success, msg, data } = useSelector((state) => state.Dishes);
+  const [selectedDish, setSelectedDish] = useState(null);
 
-  const [activeList, setActiveList] = useState("");
+  // const [activeList, setActiveList] = useState("");
 
-  // const handleLogin = async (e: FormEvent) => {
-  //   e.preventDefault();
-  //   try {
-  //     await dispatch(dishesSlice());
-  //   } catch (error) {
-  //     console.error("Login failed:", error);
-  //   }
-  // };
   useEffect(() => {
     dispatch(dishesSlice());
   }, []);
+
   useEffect(() => {
     if (success === true && msg) {
       toast.success(msg);
@@ -52,20 +47,28 @@ const Dishes: FC<DishesProps> = () => {
           experience, one delicious meal at time
         </p>
       </div>
-      <div className="grid grid-cols-4 gap-3 md:grid-cols-8 ">
+      <div className="flex justify-between gap-2 ">
         {data?.map((i, e) => {
           return (
-            <div key={e} className="flex flex-col items-center gap-1">
-              <img
-                src={i.image}
-                alt={i.name}
-                className={
-                  i.image === activeList ? "activeList rounded-full" : ""
-                }
-                onClick={() => setActiveList(i.image)}
-              />
-              <p>{i.name}</p>
-            </div>
+            <Link
+              to={`/Singledish/${i?.id}`}
+              key={i.slug}
+              onClick={() => setSelectedDish(i.id)} 
+            >
+              {" "}
+              <div key={e} className="flex flex-col items-center gap-1">
+                <img
+                  src={i.image}
+                  alt={i.name}
+                  className="w-20 h-20 rounded-full cursor-pointer md:w-40 md:h-40 activeList"
+                  // className={`rounded-full md:w-40 md:h-40 w-20 h-20 activeList  ${
+                  //   i.image === activeList ? "activeList" : ""
+                  // }`}
+                  // onClick={() => setActiveList(i.image)}
+                />
+                <p className="text-sm">{i.name}</p>
+              </div>
+            </Link>
           );
         })}
       </div>

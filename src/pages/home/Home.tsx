@@ -4,6 +4,7 @@ import Hero from "../../components/Hero";
 import Menu from "./Menu";
 import Carousels from "./Carousels";
 import Dishes from "../Dishes/Dishes";
+import Container from "../../components/Container";
 
 interface HomeProps {}
 
@@ -13,11 +14,9 @@ const Home: FC<HomeProps> = () => {
       <div className="my-5">
         <Carousels />
       </div>
-      <Hero />
-      <Menu />
-      <br/>
-      <p>sdfghjkl;</p>
-      <Dishes/>
+      <Container>
+        <Dishes />
+      </Container>
     </div>
   );
 };

@@ -10,7 +10,7 @@ const initialState: Slice<CategoryType> = {
   data: {},
 };
 
-const singleCarouselsSlice = createSlice({
+const singleDishesSlice = createSlice({
   name: "dishes",
   initialState,
   reducers: {},
@@ -51,4 +51,4 @@ const singleCarouselsSlice = createSlice({
   },
 });
 
-export default singleCarouselsSlice.reducer;
+export default singleDishesSlice.reducer;

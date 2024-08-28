@@ -39,10 +39,16 @@ li.active::after {
   transform-origin: left;
 }
 
+/* .activeList {
+   padding: 2px;
+  border: 4px solid salmon; 
+  @apply hover:p-[2px] hover:border-[2px]
+} */
+
 .activeList {
-  padding: 2px;
-  border: 4px solid salmon;
+  @apply hover:p-[2px] hover:border-[3px] hover:border-red-300 ;
 }
+
 
 @keyframes slideUp {
   from {
