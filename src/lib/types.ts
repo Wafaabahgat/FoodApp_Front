@@ -60,3 +60,13 @@ export interface PaginationType {
   next_page_url?: string;
   last_page_url?: string;
 }
+
+export interface DishType {
+  id: number;
+  restaurant_id: number;
+  category_id: number;
+  name: string;
+  description: string;
+  image: string;
+  price: string;
+}

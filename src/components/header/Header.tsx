@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { assets } from "../../assets/assets";
-import { Button } from "../Ui/Button";
 import UserCard from "../Ui/UserCard";
 import Cookies from "universal-cookie";
 import { Link } from "react-router-dom";
 import { IoIosMenu } from "react-icons/io";
 
 const cookies = new Cookies();
+const user = cookies.get("user");
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -29,7 +29,7 @@ const Header = () => {
   };
 
   const handleLogout = () => {
-    console.log("object");
+    // console.log("object");
     cookies.remove("user");
     cookies.remove("token");
     window.location.href = "/login";
@@ -47,7 +47,7 @@ const Header = () => {
 
         {open && (
           <div className="absolute right-0 p-4 mt-2 bg-white rounded-lg shadow-lg">
-            <UserCard onclick={handleLogout} />
+            <UserCard onclick={handleLogout} user={user} />
           </div>
         )}
       </div>

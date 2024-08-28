@@ -2,20 +2,18 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import login from "../slice/Auth/login/login";
 import register from "../slice/Auth/register/register";
-import Restaurant from "../slice/Restaurant/Restaurant";
 import Carousels from "../slice/Carousels/Carousels";
-
+import Dishes from "../slice/Dishes/Dishes";
 
 export const store = configureStore({
   reducer: {
     //// Auth ////
     login,
     register,
-    //// Courses ////
 
-    Restaurant,
+    //////////////
     Carousels,
-
+    Dishes: Dishes,
   },
 });
 
