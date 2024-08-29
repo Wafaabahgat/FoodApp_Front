@@ -17,7 +17,7 @@ const Dishes: FC<DishesProps> = () => {
 
   useEffect(() => {
     dispatch(dishesSlice());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (success === true && msg) {

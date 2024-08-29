@@ -9,7 +9,7 @@ const Carousels = () => {
   const dispatch = useDispatch();
 
   const { loading, data } = useSelector((state) => state.Carousels);
-  console.log("datass:", data);
+  // console.log("carousels:", data);
   const [currentImage, setCurrentImage] = useState(0);
 
   useEffect(() => {
@@ -47,8 +47,6 @@ const Carousels = () => {
       setCurrentImage((e) => e + 1);
     }
   };
-
-  
 
   return (
     <section className="w-full h-full">
