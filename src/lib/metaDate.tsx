@@ -1,7 +1,12 @@
-import React from "react";
+import { FC } from "react";
 import { Helmet } from "react-helmet";
 
-const MetaDate = ({ ttl, disc }) => {
+interface metaDateProps {
+  ttl: string;
+  disc?: string;
+}
+
+const MetaDate: FC<metaDateProps> = ({ ttl, disc }) => {
   return (
     <Helmet>
       <title>{ttl}</title>

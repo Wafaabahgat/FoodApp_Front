@@ -11,7 +11,7 @@ interface HomeProps {}
 const Home: FC<HomeProps> = () => {
   return (
     <div>
-      <div className="my-5">
+      <div className="mb-5">
         <Carousels />
       </div>
       <Container>

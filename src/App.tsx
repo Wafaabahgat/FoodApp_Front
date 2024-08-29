@@ -8,6 +8,7 @@ import Register from "./pages/auth/Register";
 import Login from "./pages/auth/Login";
 import Dishes from "./pages/Dishes/Dishes";
 import SingleDish from "./pages/Dishes/SingleDish";
+import AllRestaurants from './pages/Restaurants/AllRestaurants';
 // import GuestUser from "./middleware/GuestUser";
 
 const router = createBrowserRouter([
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home />,
       },
+       {
+         path: "/allrestaurants",
+         element: <AllRestaurants />,
+       },
       // {
       //   path: "/dishes",
       //   element: <Dishes />,

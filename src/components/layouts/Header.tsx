@@ -36,7 +36,7 @@ const Header = () => {
   };
 
   return (
-    <div className="flex items-center justify-between mt-5">
+    <div className="flex items-center justify-between mt-5 mx-7">
       <Link to="/">
         <img src={assets.logo} alt="Logo" className="cursor-pointer" />
       </Link>
@@ -46,7 +46,7 @@ const Header = () => {
         </div>
 
         {open && (
-          <div className="absolute right-0 p-4 mt-2 bg-white rounded-lg shadow-lg">
+          <div className="absolute mt-5 bg-white rounded-lg shadow-lg left-12">
             <UserCard onclick={handleLogout} user={user} />
           </div>
         )}

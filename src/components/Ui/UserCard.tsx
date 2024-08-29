@@ -51,7 +51,10 @@ const UserCard: FC<UserCardProps> = ({ onclick, user, ...props }) => {
                 <li className="p-2 font-semibold">Profile</li>
               </Link>
               <Link to="/menu">
-                <li className="p-2 font-semibold">Menu</li>
+                <li className="p-2 font-semibold">All Menu</li>
+              </Link>
+              <Link to="/allrestaurants">
+                <li className="p-2 font-semibold"> All Restaurants</li>
               </Link>
 
               <Link className="flex items-center justify-center" to="/cartItem">
@@ -60,7 +63,7 @@ const UserCard: FC<UserCardProps> = ({ onclick, user, ...props }) => {
               </Link>
             </ul>
             <h2
-              className="flex items-center justify-center gap-2 p-2 font-semibold text-white bg-red-400 rounded-md "
+              className="flex items-center justify-center gap-2 p-2 font-semibold text-white bg-orange-400 rounded-md "
               onClick={onclick}
             >
               <FaSignOutAlt />
