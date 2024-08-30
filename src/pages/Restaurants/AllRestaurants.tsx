@@ -58,7 +58,7 @@ const AllRestaurants: FC<AllRestaurantsProps> = () => {
         <Filter />
         {/* RestaurantsCard */}
         <div className="flex flex-col items-center justify-center col-span-2 mt-10 md:col-span-2 lg:col-span-3">
-          <Title ttl="All Restaurants" />
+          <Title ttl="All Restaurants" className="mb-3"/>
           <Search />
           <div className="flex mt-2">
             <div className="px-4 py-8 border-t border-l rounded-md shadow-2xl ">
