@@ -5,7 +5,7 @@ import Input from "./Input";
 import { cn } from "../../lib/utils";
 
 interface SearchProps {
-  className: string;
+  className?: string;
 }
 
 const Search: FC<SearchProps> = ({ className }) => {

@@ -84,3 +84,6 @@ li.active::after {
 .swiper-pagination-bullets {
   bottom: 10px;
 }
+.paginate__link {
+  @apply py-1 px-2 min-w-[35px] text-center -mr-px font-semibold border border-slate-300;
+}

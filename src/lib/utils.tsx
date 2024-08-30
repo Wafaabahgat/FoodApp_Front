@@ -15,6 +15,6 @@ export const uploadImg = (e) => {
   return { img };
 };
 
-export const adminImgUrl = ({ img }) => {
-  return `https://estore.ammarelgendy.online/storage/${img}`;
+export const adminImgUrl = ({ image }) => {
+  return `http://localhost:8000/storage/${image}`;
 };
